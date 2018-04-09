@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BlockMusic</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <p class="title">BlockMusic</p>
+    <div class="container">
+      <fieldset>
+        <form action="/" method="post">
+          <input name="song" type="text" class="ghost-input" placeholder="Enter the name of the song" required>
+          <input type="submit" class="ghost-button" value="Get Song">
+        </form>
+        <% if(results){ %>
+            </br>
+            <p> Results shown for the query : <%= song %></p>
+        </br>
+            <table style="width:100%">
+            <tr>
+              <th>NAME</th>
+              <th>ARTIST</th>
+              <th>COST</th>
+            </tr>
+                <% results.forEach(function(r){ console.log(r);%>
+                    <td> <%- r.name %> </td>
+                    <td> <%- r.artist %> </td>
+                    <td> <%- r.cost %> </td>
+                <% }); %>
+          </table>
+        <% } %>
+
+        <% if(error !== null){ %>
+          <p><%= error %></p>
+        <% } %>
+      </fieldset>
+    </div>
+  </body>
+</html>
