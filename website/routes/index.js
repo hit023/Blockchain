@@ -1,9 +1,16 @@
-const bodyParser = require('body-parser')
-const mysql = require('mysql');
-var http = require('http');
-var session = require('express-session');
+exports.main = function (req, res) {
+    res.render('index');
+}
 
-var express = require('express');
-var router = express.Router();
 
-module.exports = router;
+/*[
+  check('sender', 'Sender must be a String').exists(),
+  check('recipient', 'Sender must be a String').exists(),
+  check('amount', 'Sender must be a Int Value').isInt().exists()
+]
+router.post('/transactions/new', [
+  check('sender', 'Sender must be a String').exists(),
+  check('recipient', 'Sender must be a String').exists(),
+  check('amount', 'Sender must be a Int Value').isInt().exists()
+], BlockMusic.newTransaction, responseMiddleware)
+*/

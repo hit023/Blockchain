@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>BlockMusic</title>
+    <title>Welcome <%= user %></title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <p class="title">Artist</p>
+    <p class="title">BlockMusic</p>
     <div class="container">
       <fieldset>
           <% if(success) {%>
@@ -26,12 +26,12 @@
               <th>COST</th>
             </tr>
                 <% results.forEach(function(r){ console.log(r);%>
-                    <form action = "/stream" method="get">
+                    <form action = "/buy" method="get">
                     <td> <%- r.name %> </td>
                     <td > <%- r.artist %> </td>
                     <td > <%- r.cost %> </td>
                     <input type = "hidden" name="id" value =  <%= r.id %>>
-                    <td><input type="submit" value = "Stream this"></td>
+                    <td><input type="submit" value = "Buy this"></td>
                 <% }); %>
           </table>
         <% } %>
@@ -41,11 +41,11 @@
         <% } %>
         <% }else if(!success){ %>
             <% if(message.length){ %>
-                <script>alert(message);</script>
+                <script>alert("<%= message %>");</script>
             <% } %>
             <div class="container">
 	        <section id="content">
-        		<form action="/login" method = "post">
+        		<form action="/artistLogin" method = "post">
         			<h1>Login Form</h1>
         			<div>
         				<h3>Username: </h3><input type="text" placeholder="Username" name="name" />
