@@ -7,14 +7,15 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <p class="title">BlockMusic</p>
+    <p class="title">Artist</p>
     <div class="container">
       <fieldset>
-        <form action="/" method="post">
+          <% if(success) {%>
+        <form action="/getSong" method="post">
           <input name="song" type="text" class="ghost-input" placeholder="Enter the name of the song" required>
           <input type="submit" class="ghost-button" value="Get Song">
         </form>
-        <% if(results){ %>
+        <% if(results !== null){ %>
             </br>
             <p> Results shown for the query : <%= song %></p>
         </br>
@@ -25,9 +26,12 @@
               <th>COST</th>
             </tr>
                 <% results.forEach(function(r){ console.log(r);%>
+                    <form action = "/stream" method="get">
                     <td> <%- r.name %> </td>
-                    <td> <%- r.artist %> </td>
-                    <td> <%- r.cost %> </td>
+                    <td > <%- r.artist %> </td>
+                    <td > <%- r.cost %> </td>
+                    <input type = "hidden" name="id" value =  <%= r.id %>>
+                    <td><input type="submit" value = "Stream this"></td>
                 <% }); %>
           </table>
         <% } %>
@@ -35,6 +39,28 @@
         <% if(error !== null){ %>
           <p><%= error %></p>
         <% } %>
+        <% }else if(!success){ %>
+            <% if(message.length){ %>
+                <script>alert(message);</script>
+            <% } %>
+            <div class="container">
+	        <section id="content">
+        		<form action="/login" method = "post">
+        			<h1>Login Form</h1>
+        			<div>
+        				<h3>Username: </h3><input type="text" placeholder="Username" name="name" />
+        			</div>
+        			<div>
+        				<h3>Password: </h3><input type="password" placeholder="Password" name="password" />
+        			</div>
+        			<div>
+        				<input type="submit" value="Enter" />
+        			</div>
+        		</form>
+
+	        </section>
+            </div>
+            <% } %>
       </fieldset>
     </div>
   </body>
