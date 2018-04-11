@@ -32,15 +32,16 @@ app.get('/',index.main);
 app.post('/userLogin',listener.userLogin);
 app.post('/artistLogin',artist.artistLogin);
 app.post('/getSong',listener.getSong);
+app.post('/getTransactions',artist.getTransactions);
 
 app.post('/buy',[check('sender', 'Sender must be a String').exists(),
-check('recipient', 'Sender must be a String').exists(),
-check('amount', 'Sender must be a Int Value').isInt().exists()
+check('recipients', 'Sender must be a String').exists(),
+check('cost', 'Sender must be a Int Value').isInt().exists()
 ], BlockMusic.newTransaction, responseMiddleware);
 
 app.get('/mine', BlockMusic.mine, responseMiddleware);
 app.get('/chain', BlockMusic.getChain, responseMiddleware);
 
-app.listen(6009, function () {
+app.listen(6030, function () {
     console.log('App listening on port: 6005');
 });

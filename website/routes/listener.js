@@ -34,10 +34,13 @@ exports.getSong = function (req, res) {
 
 exports.main = function(req, res, next){
     let name = req.session.name;
-    if(!name)
+    if(name == undefined)
     {
         req.session.name = 'Guest';
         res.render('listener', {user : req.session.name, success : req.session.success, message : ""});
+    }
+    else {
+        res.render('listener', {user : req.session.name, success : req.session.success, results : null, song : null,error : null});
     }
 }
 

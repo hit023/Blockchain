@@ -11,34 +11,12 @@
     <div class="container">
       <fieldset>
           <% if(success) {%>
-        <form action="/getSong" method="post">
-          <input name="song" type="text" class="ghost-input" placeholder="Enter the name of the song" required>
-          <input type="submit" class="ghost-button" value="Get Song">
-        </form>
-        <% if(results !== null){ %>
-            </br>
-            <p> Results shown for the query : <%= song %></p>
-        </br>
-            <table style="width:100%">
-            <tr>
-              <th>NAME</th>
-              <th>ARTIST</th>
-              <th>COST</th>
-            </tr>
-                <% results.forEach(function(r){ console.log(r);%>
-                    <form action = "/buy" method="get">
-                    <td> <%- r.name %> </td>
-                    <td > <%- r.artist %> </td>
-                    <td > <%- r.cost %> </td>
-                    <input type = "hidden" name="id" value =  <%= r.id %>>
-                    <td><input type="submit" value = "Buy this"></td>
-                <% }); %>
-          </table>
-        <% } %>
-
+              <form action = "/getTransactions" method = "post">
+                  <input type="submit" value="Show Transactions">
+              </form>
         <% if(error !== null){ %>
           <p><%= error %></p>
-        <% } %>
+          <% } %>
         <% }else if(!success){ %>
             <% if(message.length){ %>
                 <script>alert("<%= message %>");</script>
@@ -63,5 +41,6 @@
             <% } %>
       </fieldset>
     </div>
+    <p><form method="get" action="/chain"><input type="submit" value="View Blockchain"></form></p>
   </body>
 </html>

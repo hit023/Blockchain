@@ -1,4 +1,8 @@
-var mysql = require('mysql');
+const BlockMusic = require('../blockmusic')
+
+const responseMiddleware = (req, res, next) => {
+  return res.json(req.responseValue)
+}
 
 exports.artistLogin = function(req,res,next){
     var message = '';
@@ -26,11 +30,18 @@ exports.artistLogin = function(req,res,next){
     });
 }
 
+exports.getTransactions = function(req, res, next){
+    var chain = BlockMusic.blockchain.chain;
+    console.log(chain);
+    res.send(chain);
+}
+
 exports.main = function(req, res, next) {
     let name = req.session.name;
-    if(!name)
+    if(name == undefined)
     {
         req.session.name = 'Guest';
-        res.render('artist', {user : req.session.name, success : req.session.success, message : ""});
+        //console.log("hello");
+        res.render('artist',{user : req.session.name, success : req.session.success, message : ''});
     }
 }
